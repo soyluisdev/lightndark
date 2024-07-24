@@ -1,1 +1,1 @@
-# Light n' Dark 
+# Light n' Dark Design System (Under development)
