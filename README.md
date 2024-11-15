@@ -2,6 +2,10 @@
 
 This project is a **Design System** implemented using **HTML**, **CSS**, and **JavaScript**. It showcases a responsive web layout with a light/dark mode toggle, navigation menu, styled sections, and interactive elements.
 
+![Light Mode](/docs/light_1.png)
+-----------------------------
+![Dark Mode](/docs/dark_1.png)
+
 ## Features
 
 - **Light/Dark Mode Toggle**: Switch between light and dark themes dynamically.
