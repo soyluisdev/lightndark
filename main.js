@@ -1,3 +1,5 @@
+
+const currentTheme = localStorage.getItem('theme');
 const toggleSwitch = document.querySelector('.light-dark');
 const nav = document.querySelector('.menu-back')
 const toggleIcon = document.getElementById('toggle-icon');
@@ -6,20 +8,24 @@ const image2 = document.getElementById('image2');
 const image3 = document.getElementById('image3');
 const textBox = document.getElementById('text-box');
 
-// Dark Mode
 
-function darkMode() {
-    nav.style.backgroundColor = 'rgb(0 0 0 / 50%)';
-    textBox.style.backgroundColor = 'rgb(255 255 255 / 70%)';
-    toggleIcon.children[0].textContent = 'Dark Mode';
+// Is Light Mode
+
+function toggleLightDarkMode(isLight) {
+    nav.style.backgroundColor = isLight ? 'rgb(255 255 255 / 80%)' : 'rgb(0 0 0 / 50%)' ;
+    textBox.style.backgroundColor = isLight ? 'rgb(0 0 0 / 70%)' : 'rgb(255 255 255 / 70%)';
+    toggleIcon.children[0].textContent = isLight ? 'Light Mode' : 'Dark Mode';
+    isLight ? toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun') :
     toggleIcon.children[1].classList.replace('fa-sun', 'fa-moon');
-    toggleIcon.children[1].classList.add('fa-moon');
+    isLight ? document.documentElement.setAttribute('data-theme', 'light') :
     document.documentElement.setAttribute('data-theme', 'dark');
+    isLight ? localStorage.setItem('theme', 'light') :
     localStorage.setItem('theme', 'dark');
-    const currentTheme = localStorage.getItem('theme');
+    isLight ? imageMode('light') : imageMode('dark');
     console.log(currentTheme);
-    imageMode('dark');
 }
+
+
 
 function imageMode(color) {
     image1.src = `/img/undraw_proud_coder_${color}.svg`
@@ -27,37 +33,24 @@ function imageMode(color) {
     image3.src = `/img/undraw_conceptual_idea_${color}.svg`    
 }
 
-function lightMode() {
-    nav.style.backgroundColor = 'rgb(255 255 255 / 80%)';
-    textBox.style.backgroundColor = 'rgb(0 0 0 / 70%)';
-    toggleIcon.children[0].textContent = 'Dark Mode';
-    toggleIcon.children[1].classList.replace('fa-moon', 'fa-sun');
-    toggleIcon.children[1].classList.add('fa-sun');
-    document.documentElement.setAttribute('data-theme', 'light');
-    localStorage.setItem('theme', 'light');
-    imageMode('light');
-    const currentTheme = localStorage.getItem('theme');
-    console.log(currentTheme);
-}
-
 //Switch Theme
 function switchTheme(event) {
     if (event.target.checked) {
-        darkMode();
+        toggleLightDarkMode(true);
     } else {
-        lightMode();
+        toggleLightDarkMode(false);
     }
 }
+
 
 //Event Listener
 toggleSwitch.addEventListener('change', switchTheme)
 
-const currentTheme = localStorage.getItem('theme');
-if (currentTheme) {
-    document.documentElement.setAttribute('data-theme', currentTheme)
-
-    if (currentTheme === 'dark') {
-        toggleSwitch.checked = true;
-        darkMode();
+if (currentTheme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    toggleLightDarkMode(false);
+    
+    if (currentTheme === 'light') {
+        toggleSwitch.checked = false;
     }
 }
