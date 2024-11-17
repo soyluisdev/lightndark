@@ -36,3 +36,6 @@ This project is a **Design System** implemented using **HTML**, **CSS**, and **J
 ### Running the Project
 1. Clone the repository.  
 2. Run the server.  
+
+### Preview
+- You can see a preview of the full project [here](https://lightndark.vercel.app/)
